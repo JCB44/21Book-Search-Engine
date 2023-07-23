@@ -19,22 +19,17 @@ const resolvers = {
     addUser: async (parent, arg) => {
       const user = await User.create(arg);
       const token = signToken(user);
-
       return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Wrong credentials');
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Wrong credentials');
       }
-
       const token = signToken(user);
       return { token, user };
     },
@@ -48,7 +43,6 @@ const resolvers = {
 
         return updatedUser;
       }
-
       throw new AuthenticationError('you need to loggin first');
     },
     removeBook: async (parent, { bookId }, context) => {
@@ -58,10 +52,8 @@ const resolvers = {
           { $pull: { savedBooks: { bookId } } },
           { new: true }
         );
-
         return updatedUser;
       }
-
       throw new AuthenticationError('you need to loggin first');
     },
   },
