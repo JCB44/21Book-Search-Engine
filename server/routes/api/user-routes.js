@@ -3,7 +3,7 @@ const {
   createUser,
   getSingleUser,
   saveBook,
-  deleteBook,
+  delBook,
   login,
 } = require('../../controllers/user-controller');
 
@@ -15,6 +15,6 @@ router.route('/login').post(login);
 
 router.route('/me').get(authMiddleware, getSingleUser);
 
-router.route('/books/:bookId').delete(authMiddleware, deleteBook);
+router.route('/books/:bookId').delete(authMiddleware, delBook);
 
 module.exports = router;

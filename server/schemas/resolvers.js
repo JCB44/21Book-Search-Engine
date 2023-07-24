@@ -16,7 +16,7 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, arg) => {
+    createUser: async (parent, arg) => {
       const user = await User.create(arg);
       const token = signToken(user);
       return { token, user };
@@ -45,7 +45,7 @@ const resolvers = {
       }
       throw new AuthenticationError('you need to loggin first');
     },
-    removeBook: async (parent, { bookId }, context) => {
+    delBook: async (parent, { bookId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
