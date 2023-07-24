@@ -25,6 +25,62 @@ export const getMe = (token) => {
   });
 };
 
+export const saveBook = (bookData, token) => {
+  return fetch('/graphql', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      mutation: `mutation saveBook($input: BookInput!) {
+        saveBook(input: $input) {
+          _id
+          username
+          email
+          savedBooks {
+            _id
+            authors
+            description
+            title
+            image
+            link
+          }
+        }
+      }`,
+      variables: { input: bookData },
+    }),
+  });
+};
+
+export const delBook = (bookId, token) => {
+  return fetch(`/graphql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      mutation: `mutation delBook($bookId: ID!) {
+        delBook(bookId: $bookId) {
+          _id
+          username
+          email
+          savedBooks {
+            _id
+            authors
+            description
+            title
+            image
+            link
+          }
+        }
+      }`,
+      variables: { bookId },
+    }),
+  });
+};
+
 export const createUser = (userData) => {
   return fetch('/graphql', {
     method: 'POST',
@@ -63,62 +119,6 @@ export const loginUser = (userData) => {
         }
       }`,
       variables: userData,
-    }),
-  });
-};
-
-export const saveBook = (bookData, token) => {
-  return fetch('/graphql', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      mutation: `mutation saveBook($input: BookInput!) {
-        saveBook(input: $input) {
-          _id
-          username
-          email
-          savedBooks {
-            _id
-            authors
-            description
-            title
-            image
-            link
-          }
-        }
-      }`,
-      variables: { input: bookData },
-    }),
-  });
-};
-
-export const deleteBook = (bookId, token) => {
-  return fetch(`/graphql`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      mutation: `mutation deleteBook($bookId: ID!) {
-        deleteBook(bookId: $bookId) {
-          _id
-          username
-          email
-          savedBooks {
-            _id
-            authors
-            description
-            title
-            image
-            link
-          }
-        }
-      }`,
-      variables: { bookId },
     }),
   });
 };

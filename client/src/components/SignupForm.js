@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { ADD_USER } from '../graphql/mutations';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  const [validated] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+
   const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
@@ -17,7 +18,6 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -54,7 +54,6 @@ const SignupForm = () => {
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
         </Alert>
-
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='username'>Username</Form.Label>
           <Form.Control
