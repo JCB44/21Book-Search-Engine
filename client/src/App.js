@@ -25,6 +25,11 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// const client = new ApolloClient({
+//   link: authLink.concat(httpLink),
+//   cache: new InMemoryCache(),
+// });
+
 function App() {
   return (
     <ApolloProvider client={client}>
