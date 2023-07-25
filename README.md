@@ -21,6 +21,7 @@
 ***Lindsey Isaac***<br>
 ***Jacqueline Martinez***<br>
 ***Matt Montiel***<br>
+***TA: Rachel Solov***<br>
 
 
 ## DeployedApp
