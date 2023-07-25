@@ -29,4 +29,4 @@
 
 MIT License
 
-Copyright (c) 2023 Lindsey
+Copyright (c) 2023 Joshua Butts
