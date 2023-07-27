@@ -22,10 +22,7 @@ app.get('/', (req, res) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
-    const user = authMiddleware(req);
-    return user;
-  },
+  context: authMiddleware,
 });
 
 const startApolloServer = async () => {

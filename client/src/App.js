@@ -1,6 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import{ ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, ApolloLink } from '@apollo/client';
+import{ 
+  ApolloClient, 
+  InMemoryCache, 
+  ApolloProvider, 
+  createHttpLink, } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
@@ -20,15 +24,15 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const client = new ApolloClient({
-  link: ApolloLink.from([authLink, httpLink]),
-  cache: new InMemoryCache(),
-});
-
 // const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
+//   link: ApolloLink.from([authLink, httpLink]),
 //   cache: new InMemoryCache(),
 // });
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
