@@ -50,7 +50,7 @@ module.exports = {
       return res.status(400).json(err);
     }
   },
-  async delBook({ user, params }, res) {
+  async removeBook({ user, params }, res) {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user._id },
       { $pull: { savedBooks: { bookId: params.bookId } } },

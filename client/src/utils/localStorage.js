@@ -14,7 +14,7 @@ export const saveBookIds = (bookIdArr) => {
   }
 };
 
-export const delBookId = (bookId) => {
+export const removeBookId = (bookId) => {
   const savedBookIds = localStorage.getItem('saved_books')
     ? JSON.parse(localStorage.getItem('saved_books'))
     : null;

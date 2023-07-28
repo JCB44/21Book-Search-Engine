@@ -37,13 +37,14 @@ userSchema.pre('save', async function (next) {
 
   next();
 });
+
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
+
 userSchema.virtual('bookCount').get(function () {
   return this.savedBooks.length;
 });
-
 const User = model('User', userSchema);
 
 module.exports = User;
